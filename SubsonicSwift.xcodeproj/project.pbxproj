@@ -34,6 +34,7 @@
 		C90EC2D3193EAEF900EB8D92 /* SubsonicSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubsonicSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90EC2D8193EAEF900EB8D92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsonicSwiftTests.swift; sourceTree = "<group>"; };
+		C90EC2E3193EAF3C00EB8D92 /* Study.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Study.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 		C90EC2B8193EAEF900EB8D92 = {
 			isa = PBXGroup;
 			children = (
+				C90EC2E3193EAF3C00EB8D92 /* Study.playground */,
 				C90EC2C3193EAEF900EB8D92 /* SubsonicSwift */,
 				C90EC2D6193EAEF900EB8D92 /* SubsonicSwiftTests */,
 				C90EC2C2193EAEF900EB8D92 /* Products */,
