@@ -10,17 +10,31 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
                             
+    @IBOutlet var serverField : NSTextField
+    @IBOutlet var usernameField : NSTextField
+    @IBOutlet var passwordField : NSSecureTextField
     @IBOutlet var window: NSWindow
-
+    var client: SubsonicClient?
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        // Insert code here to initialize your application
     }
 
     func applicationWillTerminate(aNotification: NSNotification?) {
-        // Insert code here to tear down your application
     }
 
+    @IBAction func pingPressed(sender : AnyObject) {
+        self.client = SubsonicClient(
+            appName: "Matt’s Awesome App",
+            baseURL: NSURL(string: serverField.stringValue),
+            username: usernameField.stringValue,
+            password: passwordField.stringValue)
 
+        if let client = self.client {
+            client.ping {
+                (data, response, error) in
+                NSLog("data: \(data)\nresponse: \(response)\nerror: \(error)")
+            }
+        }
+    }
 }
 

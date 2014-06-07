@@ -12,6 +12,8 @@
 		C90EC2CB193EAEF900EB8D92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C90EC2CA193EAEF900EB8D92 /* Images.xcassets */; };
 		C90EC2CE193EAEF900EB8D92 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C90EC2CC193EAEF900EB8D92 /* MainMenu.xib */; };
 		C90EC2DA193EAEF900EB8D92 /* SubsonicSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */; };
+		C987CDEB1940A12D003E3438 /* SubsonicClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987CDEA1940A12D003E3438 /* SubsonicClient.swift */; };
+		C9B02A40193EB9310000BC98 /* NSURLCredentialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,8 @@
 		C90EC2D8193EAEF900EB8D92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsonicSwiftTests.swift; sourceTree = "<group>"; };
 		C90EC2E3193EAF3C00EB8D92 /* Study.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Study.playground; sourceTree = "<group>"; };
+		C987CDEA1940A12D003E3438 /* SubsonicClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubsonicClient.swift; sourceTree = "<group>"; };
+		C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLCredentialExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		C90EC2B8193EAEF900EB8D92 = {
 			isa = PBXGroup;
 			children = (
+				C9B02A3E193EB8D00000BC98 /* Classes */,
 				C90EC2E3193EAF3C00EB8D92 /* Study.playground */,
 				C90EC2C3193EAEF900EB8D92 /* SubsonicSwift */,
 				C90EC2D6193EAEF900EB8D92 /* SubsonicSwiftTests */,
@@ -109,6 +114,15 @@
 				C90EC2D8193EAEF900EB8D92 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C9B02A3E193EB8D00000BC98 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C987CDEA1940A12D003E3438 /* SubsonicClient.swift */,
+				C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +224,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C987CDEB1940A12D003E3438 /* SubsonicClient.swift in Sources */,
 				C90EC2C9193EAEF900EB8D92 /* AppDelegate.swift in Sources */,
+				C9B02A40193EB9310000BC98 /* NSURLCredentialExtension.swift in Sources */,
 				C90EC2C7193EAEF900EB8D92 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +417,7 @@
 				C90EC2DF193EAEF900EB8D92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C90EC2E0193EAEF900EB8D92 /* Build configuration list for PBXNativeTarget "SubsonicSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +426,7 @@
 				C90EC2E2193EAEF900EB8D92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
