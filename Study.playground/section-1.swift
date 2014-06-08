@@ -39,5 +39,4 @@ extension NSURLCredential {
     }
 }
 
-let ba = cred.basicAuthenticationString
 

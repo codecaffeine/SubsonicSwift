@@ -37,6 +37,7 @@
 		C90EC2D8193EAEF900EB8D92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsonicSwiftTests.swift; sourceTree = "<group>"; };
 		C90EC2E3193EAF3C00EB8D92 /* Study.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Study.playground; sourceTree = "<group>"; };
+		C919695F1943999F007360AD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C987CDEA1940A12D003E3438 /* SubsonicClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubsonicClient.swift; sourceTree = "<group>"; };
 		C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLCredentialExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,8 +63,9 @@
 		C90EC2B8193EAEF900EB8D92 = {
 			isa = PBXGroup;
 			children = (
-				C9B02A3E193EB8D00000BC98 /* Classes */,
+				C919695F1943999F007360AD /* README.md */,
 				C90EC2E3193EAF3C00EB8D92 /* Study.playground */,
+				C9B02A3E193EB8D00000BC98 /* Classes */,
 				C90EC2C3193EAEF900EB8D92 /* SubsonicSwift */,
 				C90EC2D6193EAEF900EB8D92 /* SubsonicSwiftTests */,
 				C90EC2C2193EAEF900EB8D92 /* Products */,

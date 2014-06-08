@@ -25,13 +25,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func pingPressed(sender : AnyObject) {
         self.client = SubsonicClient(
             appName: "Matt’s Awesome App",
-            baseURL: NSURL(string: serverField.stringValue),
+            baseURL: serverField.stringValue,
             username: usernameField.stringValue,
             password: passwordField.stringValue)
 
         if let client = self.client {
             client.ping {
                 (data, response, error) in
+                NSLog("data: \(data)\nresponse: \(response)\nerror: \(error)")
+            }
+        }
+    }
+    @IBAction func artistsPressed(sender : NSButton) {
+        if let client = self.client {
+            client.artists {
+                data, response, error in
                 NSLog("data: \(data)\nresponse: \(response)\nerror: \(error)")
             }
         }
