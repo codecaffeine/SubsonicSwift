@@ -12,6 +12,8 @@
 		C90EC2CB193EAEF900EB8D92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C90EC2CA193EAEF900EB8D92 /* Images.xcassets */; };
 		C90EC2CE193EAEF900EB8D92 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C90EC2CC193EAEF900EB8D92 /* MainMenu.xib */; };
 		C90EC2DA193EAEF900EB8D92 /* SubsonicSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */; };
+		C96E4B03194BDE7300072D8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96E4B01194BDE7300072D8A /* LoginViewController.swift */; };
+		C96E4B04194BDE7300072D8A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96E4B02194BDE7300072D8A /* LoginViewController.xib */; };
 		C987CDEB1940A12D003E3438 /* SubsonicClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987CDEA1940A12D003E3438 /* SubsonicClient.swift */; };
 		C9B02A40193EB9310000BC98 /* NSURLCredentialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +40,8 @@
 		C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsonicSwiftTests.swift; sourceTree = "<group>"; };
 		C90EC2E3193EAF3C00EB8D92 /* Study.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Study.playground; sourceTree = "<group>"; };
 		C919695F1943999F007360AD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C96E4B01194BDE7300072D8A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C96E4B02194BDE7300072D8A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		C987CDEA1940A12D003E3438 /* SubsonicClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubsonicClient.swift; sourceTree = "<group>"; };
 		C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLCredentialExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +92,8 @@
 				C90EC2CA193EAEF900EB8D92 /* Images.xcassets */,
 				C90EC2CC193EAEF900EB8D92 /* MainMenu.xib */,
 				C90EC2C4193EAEF900EB8D92 /* Supporting Files */,
+				C96E4B01194BDE7300072D8A /* LoginViewController.swift */,
+				C96E4B02194BDE7300072D8A /* LoginViewController.xib */,
 			);
 			path = SubsonicSwift;
 			sourceTree = "<group>";
@@ -209,6 +215,7 @@
 			files = (
 				C90EC2CB193EAEF900EB8D92 /* Images.xcassets in Resources */,
 				C90EC2CE193EAEF900EB8D92 /* MainMenu.xib in Resources */,
+				C96E4B04194BDE7300072D8A /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +236,7 @@
 				C987CDEB1940A12D003E3438 /* SubsonicClient.swift in Sources */,
 				C90EC2C9193EAEF900EB8D92 /* AppDelegate.swift in Sources */,
 				C9B02A40193EB9310000BC98 /* NSURLCredentialExtension.swift in Sources */,
+				C96E4B03194BDE7300072D8A /* LoginViewController.swift in Sources */,
 				C90EC2C7193EAEF900EB8D92 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

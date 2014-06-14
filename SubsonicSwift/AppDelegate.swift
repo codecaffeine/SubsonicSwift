@@ -23,16 +23,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func pingPressed(sender : AnyObject) {
-        self.client = SubsonicClient(
-            appName: "Matt’s Awesome App",
+        self.client = SubsonicClient(appName: "Matt’s Awesome App",
             baseURL: serverField.stringValue,
-            username: usernameField.stringValue,
-            password: passwordField.stringValue)
+            sessionConfig: NSURLSessionConfiguration.defaultSessionConfiguration())
 
         if let client = self.client {
-            client.ping {
-                (data, response, error) in
-                NSLog("data: \(data)\nresponse: \(response)\nerror: \(error)")
+            client.authenticate(user: usernameField.stringValue,
+                password: passwordField.stringValue) { credential, response, error in
+                    println("credential: \(credential)\nresponse: \(response)\nerror: \(error)")
             }
         }
     }

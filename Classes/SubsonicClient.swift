@@ -23,7 +23,7 @@ extension String {
 }
 
 extension NSURLCredential {
-    var basicAuthentication: Dictionary<String, String> {
+    var basicAuthenticationHeaders: Dictionary<String, String> {
         let base64Data = "\(self.user):\(self.password)".dataUsingEncoding(NSUTF8StringEncoding)
         let base64String = base64Data.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
         return ["Authorization": "Basic \(base64String)"]
@@ -70,16 +70,35 @@ class SubsonicClient: NSObject, NSURLSessionDelegate {
         self.baseURL.query = urlParams
     }
 
-    convenience init(appName: String, baseURL: String, username: String, password: String) {
-        let cred = NSURLCredential(user: username,
-            password: password,
-            persistence: NSURLCredentialPersistence.ForSession)
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        sessionConfig.HTTPAdditionalHeaders = cred.basicAuthentication
-        self.init(appName: appName, baseURL: baseURL, sessionConfig: sessionConfig)
+    func authenticate(#user: String, password: String, completion: ((NSURLCredential?, NSURLResponse!, NSError!) -> Void)!) {
+        let cred = NSURLCredential(user: user, password: password,
+            persistence: NSURLCredentialPersistence.Permanent)
+        self.sessionConfig.HTTPAdditionalHeaders = cred.basicAuthenticationHeaders
+
+        ping() {
+            data, response, error in
+
+            println("data: \(data)")
+            var responseCredential : NSURLCredential?
+
+            if let httpResponse = response as? NSHTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    var jsonErr : NSError?
+                    if let responseDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: &jsonErr) as? Dictionary<String, Dictionary<String, String>> {
+                        if let status = responseDict["subsonic-response"]?["status"] {
+                            if status == "ok" {
+                                responseCredential = cred
+                            }
+                        }
+                    }
+                }
+            }
+
+            completion(responseCredential, response, error)
+        }
     }
 
-    func ping(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)!) -> () {
+    func ping(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)!) {
         let pingURL: NSURLComponents = baseURL.copy() as NSURLComponents
         pingURL.path = pingURL.path + "/ping.view"
         println("pingURL.URL: \(pingURL.URL)")
@@ -90,7 +109,7 @@ class SubsonicClient: NSObject, NSURLSessionDelegate {
         task.resume()
     }
 
-    func artists(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)!) -> () {
+    func artists(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)!) {
         let urlComponents: NSURLComponents = baseURL.copy() as NSURLComponents
         urlComponents.path = urlComponents.path + "/getArtists.view"
         println("url: \(urlComponents.URL)")
@@ -103,16 +122,19 @@ class SubsonicClient: NSObject, NSURLSessionDelegate {
 
     // NSURLSessionDelegate
     func URLSession(session: NSURLSession!, task: NSURLSessionTask!, willPerformHTTPRedirection response: NSHTTPURLResponse!, newRequest request: NSURLRequest!, completionHandler: ((NSURLRequest!) -> Void)!) {
-        var newRequest: NSURLRequest? = nil
+        var newRequest: NSURLRequest?
         if response {
             var req = request.mutableCopy() as NSMutableURLRequest
-            session.configuration.HTTPAdditionalHeaders.enumerateKeysAndObjectsUsingBlock() {
-                (key, value, stop) in
-                if let keyString = key as? String {
-                    if let valueString = value as? String {
-                        req.setValue(valueString, forHTTPHeaderField: keyString)
+            if let additionalHeaders = session.configuration.HTTPAdditionalHeaders {
+                additionalHeaders.enumerateKeysAndObjectsUsingBlock() {
+                    (key, value, stop) in
+                    if let keyString = key as? String {
+                        if let valueString = value as? String {
+                            req.setValue(valueString, forHTTPHeaderField: keyString)
+                        }
                     }
                 }
+
             }
             newRequest = req.copy() as? NSURLRequest
         }
