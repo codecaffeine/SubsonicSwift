@@ -13,9 +13,6 @@
         <customObject id="-3" userLabel="Application"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="SubsonicSwift" customModuleProvider="target">
             <connections>
-                <outlet property="passwordField" destination="oBB-dp-nSr" id="2kU-Ek-Gyy"/>
-                <outlet property="serverField" destination="EQ2-Gu-Q4N" id="oAx-6H-ATN"/>
-                <outlet property="usernameField" destination="6HV-Z2-t5M" id="mEh-Wh-CIT"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -677,73 +674,6 @@
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="346" height="188"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6HV-Z2-t5M">
-                        <rect key="frame" x="20" y="114" width="306" height="22"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="username" drawsBackground="YES" id="Bkf-Tp-mG2">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oBB-dp-nSr">
-                        <rect key="frame" x="20" y="82" width="306" height="22"/>
-                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="password" drawsBackground="YES" usesSingleLineMode="YES" id="DRt-Nt-CWn">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            <allowedInputSourceLocales>
-                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
-                            </allowedInputSourceLocales>
-                        </secureTextFieldCell>
-                    </secureTextField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EQ2-Gu-Q4N">
-                        <rect key="frame" x="20" y="146" width="306" height="22"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="server" drawsBackground="YES" id="BUp-5p-g90">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ms-NH-qdz">
-                        <rect key="frame" x="14" y="46" width="318" height="32"/>
-                        <buttonCell key="cell" type="push" title="Ping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XqR-rc-IX7">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="pingPressed:" target="Voe-Tx-rLC" id="Nra-b9-3Wn"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tck-xh-wOP">
-                        <rect key="frame" x="14" y="13" width="318" height="32"/>
-                        <buttonCell key="cell" type="push" title="Artists" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZJl-Y0-AMM">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="artistsPressed:" target="Voe-Tx-rLC" id="RM3-Wj-So0"/>
-                        </connections>
-                    </button>
-                </subviews>
-                <constraints>
-                    <constraint firstAttribute="trailing" secondItem="4Ms-NH-qdz" secondAttribute="trailing" constant="20" id="9Lj-yJ-M8C"/>
-                    <constraint firstItem="tck-xh-wOP" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="BJw-aR-LRI"/>
-                    <constraint firstItem="EQ2-Gu-Q4N" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="HVs-JP-Ajq"/>
-                    <constraint firstAttribute="bottom" secondItem="tck-xh-wOP" secondAttribute="bottom" constant="20" id="Kr8-Rh-4ZX"/>
-                    <constraint firstItem="4Ms-NH-qdz" firstAttribute="top" secondItem="oBB-dp-nSr" secondAttribute="bottom" constant="8" id="L7v-KG-BKy"/>
-                    <constraint firstItem="oBB-dp-nSr" firstAttribute="top" secondItem="6HV-Z2-t5M" secondAttribute="bottom" constant="10" id="MD8-vr-IVc"/>
-                    <constraint firstItem="4Ms-NH-qdz" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="MjZ-od-KCf"/>
-                    <constraint firstItem="EQ2-Gu-Q4N" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="OC8-xd-F2Z"/>
-                    <constraint firstAttribute="trailing" secondItem="EQ2-Gu-Q4N" secondAttribute="trailing" constant="20" id="OZL-TA-AZC"/>
-                    <constraint firstAttribute="trailing" secondItem="oBB-dp-nSr" secondAttribute="trailing" constant="20" id="PQQ-om-IH8"/>
-                    <constraint firstAttribute="trailing" secondItem="tck-xh-wOP" secondAttribute="trailing" constant="20" id="PZx-fg-zM7"/>
-                    <constraint firstAttribute="trailing" secondItem="6HV-Z2-t5M" secondAttribute="trailing" constant="20" id="QGC-iQ-evb"/>
-                    <constraint firstItem="oBB-dp-nSr" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="REa-5P-Rzv"/>
-                    <constraint firstItem="6HV-Z2-t5M" firstAttribute="top" secondItem="EQ2-Gu-Q4N" secondAttribute="bottom" constant="10" id="Uqo-39-Ha7"/>
-                    <constraint firstItem="tck-xh-wOP" firstAttribute="top" secondItem="4Ms-NH-qdz" secondAttribute="bottom" constant="12" id="qVE-Mt-QvX"/>
-                    <constraint firstItem="6HV-Z2-t5M" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="waR-Oc-www"/>
-                </constraints>
             </view>
             <point key="canvasLocation" x="7" y="102"/>
         </window>
