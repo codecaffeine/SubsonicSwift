@@ -45,7 +45,7 @@ extension Dictionary {
 }
 
 class SubsonicClient: NSObject, NSURLSessionDelegate {
-    let baseURL: NSURLComponents
+    var urlComponents: NSURLComponents?
     let version = "1.10.2"
     let format = "json"
     let sessionConfig: NSURLSessionConfiguration
@@ -61,16 +61,20 @@ class SubsonicClient: NSObject, NSURLSessionDelegate {
         return params.percentEncodedQueryString
     }()
 
-    init(appName: String, baseURL: String, sessionConfig: NSURLSessionConfiguration) {
+    init(appName: String, sessionConfig: NSURLSessionConfiguration) {
         self.appName = appName
-        self.baseURL = NSURLComponents(string: baseURL)
-        self.baseURL.path = "/rest"
         self.sessionConfig = sessionConfig
         super.init()
-        self.baseURL.query = urlParams
     }
 
-    func authenticate(#user: String, password: String, completion: ((NSURLCredential?, NSURLResponse!, NSError!) -> Void)!) {
+    func authenticate(#baseURL: String, user: String, password: String, completion: ((NSURLCredential!, NSURLResponse!, NSError!) -> Void)) {
+
+        urlComponents = NSURLComponents(string: baseURL)
+        if urlComponents {
+            urlComponents!.path = "/rest"
+            urlComponents!.query = urlParams
+        }
+
         let cred = NSURLCredential(user: user, password: password,
             persistence: NSURLCredentialPersistence.Permanent)
         self.sessionConfig.HTTPAdditionalHeaders = cred.basicAuthenticationHeaders
@@ -98,26 +102,30 @@ class SubsonicClient: NSObject, NSURLSessionDelegate {
         }
     }
 
-    func ping(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)!) {
-        let pingURL: NSURLComponents = baseURL.copy() as NSURLComponents
-        pingURL.path = pingURL.path + "/ping.view"
-        println("pingURL.URL: \(pingURL.URL)")
-        let task = session.dataTaskWithURL(pingURL.URL) {
-            data, response, error in
-            completion(data, response, error)
+    func ping(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)) {
+        if urlComponents {
+            let pingComponents: NSURLComponents = urlComponents!.copy() as NSURLComponents
+            pingComponents.path = pingComponents.path + "/ping.view"
+            println("pingURL.URL: \(pingComponents.URL)")
+            let task = session.dataTaskWithURL(pingComponents.URL) {
+                data, response, error in
+                completion(data, response, error)
+            }
+            task.resume()
         }
-        task.resume()
     }
 
-    func artists(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)!) {
-        let urlComponents: NSURLComponents = baseURL.copy() as NSURLComponents
-        urlComponents.path = urlComponents.path + "/getArtists.view"
-        println("url: \(urlComponents.URL)")
-        let task = session.dataTaskWithURL(urlComponents.URL) {
-            data, response, error in
-            completion(data, response, error)
+    func artists(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)) {
+        if urlComponents {
+            let artistComponents: NSURLComponents = urlComponents!.copy() as NSURLComponents
+            artistComponents.path = artistComponents.path + "/getArtists.view"
+            println("get artists: \(artistComponents.URL)")
+            let task = session.dataTaskWithURL(artistComponents.URL) {
+                data, response, error in
+                completion(data, response, error)
+            }
+            task.resume()
         }
-        task.resume()
     }
 
     // NSURLSessionDelegate
