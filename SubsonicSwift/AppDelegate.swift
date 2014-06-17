@@ -16,7 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var window: NSWindow
     let client: SubsonicClient
     var loginViewController: LoginViewController?
-    let loginProtectionSpace: NSURLProtectionSpace?
 
     init() {
         client = SubsonicClient(appName: AppName,
