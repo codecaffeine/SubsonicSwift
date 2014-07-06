@@ -62,6 +62,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    func placeViewController(viewController: NSViewController) {
+        if let contentView = self.window.contentView as? NSView {
+            let subviewCount = contentView.subviews.count
+            for i in 0..subviewCount {
+                if let subview = contentView.subviews[i] as? NSView {
+                    subview.removeFromSuperview()
+                }
+            }
+
+            viewController.view.frame = contentView.bounds
+            viewController.view.autoresizingMask = .ViewHeightSizable | .ViewWidthSizable
+            contentView.addSubview(viewController.view)
+        }
+    }
+
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
 
         let authenticationCallback = {
@@ -70,9 +85,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if credential {
                 self?.saveNewCredentialToKeychain(credential)
                 self?.loadArtists()
-                if let contentView = self?.window.contentView as? NSView {
-                    self?.loginViewController?.view.removeFromSuperview()
-                    contentView.addSubview(self?.artistViewController.view)
+                if let artistVC = self?.artistViewController {
+                    self?.placeViewController(artistVC)
                 }
             } else {
                 self?.removeOldCredentialFromKeychain()
