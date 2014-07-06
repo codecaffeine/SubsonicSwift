@@ -12,10 +12,15 @@
 		C90EC2CB193EAEF900EB8D92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C90EC2CA193EAEF900EB8D92 /* Images.xcassets */; };
 		C90EC2CE193EAEF900EB8D92 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C90EC2CC193EAEF900EB8D92 /* MainMenu.xib */; };
 		C90EC2DA193EAEF900EB8D92 /* SubsonicSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */; };
+		C918541D1954CA04003A0B51 /* ArtistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918541B1954CA04003A0B51 /* ArtistsViewController.swift */; };
+		C918541E1954CA04003A0B51 /* ArtistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C918541C1954CA04003A0B51 /* ArtistsViewController.xib */; };
 		C96E4B03194BDE7300072D8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96E4B01194BDE7300072D8A /* LoginViewController.swift */; };
 		C96E4B04194BDE7300072D8A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96E4B02194BDE7300072D8A /* LoginViewController.xib */; };
+		C9821F5619522107006BA227 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9821F5519522107006BA227 /* DictionaryExtensions.swift */; };
+		C9821F5819522201006BA227 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9821F5719522201006BA227 /* StringExtensions.swift */; };
+		C9821F5A1952221F006BA227 /* NSURLCredentialExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9821F591952221F006BA227 /* NSURLCredentialExtensions.swift */; };
+		C9821F5C19522609006BA227 /* ArtistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9821F5B19522609006BA227 /* ArtistTests.swift */; };
 		C987CDEB1940A12D003E3438 /* SubsonicClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987CDEA1940A12D003E3438 /* SubsonicClient.swift */; };
-		C9B02A40193EB9310000BC98 /* NSURLCredentialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,11 +44,16 @@
 		C90EC2D8193EAEF900EB8D92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsonicSwiftTests.swift; sourceTree = "<group>"; };
 		C90EC2E3193EAF3C00EB8D92 /* Study.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Study.playground; sourceTree = "<group>"; };
+		C918541B1954CA04003A0B51 /* ArtistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsViewController.swift; sourceTree = "<group>"; };
+		C918541C1954CA04003A0B51 /* ArtistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistsViewController.xib; sourceTree = "<group>"; };
 		C919695F1943999F007360AD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C96E4B01194BDE7300072D8A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C96E4B02194BDE7300072D8A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		C9821F5519522107006BA227 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
+		C9821F5719522201006BA227 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		C9821F591952221F006BA227 /* NSURLCredentialExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLCredentialExtensions.swift; sourceTree = "<group>"; };
+		C9821F5B19522609006BA227 /* ArtistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTests.swift; sourceTree = "<group>"; };
 		C987CDEA1940A12D003E3438 /* SubsonicClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubsonicClient.swift; sourceTree = "<group>"; };
-		C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLCredentialExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +100,12 @@
 			children = (
 				C90EC2C8193EAEF900EB8D92 /* AppDelegate.swift */,
 				C90EC2CA193EAEF900EB8D92 /* Images.xcassets */,
-				C90EC2CC193EAEF900EB8D92 /* MainMenu.xib */,
-				C90EC2C4193EAEF900EB8D92 /* Supporting Files */,
 				C96E4B01194BDE7300072D8A /* LoginViewController.swift */,
 				C96E4B02194BDE7300072D8A /* LoginViewController.xib */,
+				C90EC2CC193EAEF900EB8D92 /* MainMenu.xib */,
+				C90EC2C4193EAEF900EB8D92 /* Supporting Files */,
+				C918541B1954CA04003A0B51 /* ArtistsViewController.swift */,
+				C918541C1954CA04003A0B51 /* ArtistsViewController.xib */,
 			);
 			path = SubsonicSwift;
 			sourceTree = "<group>";
@@ -110,6 +122,7 @@
 		C90EC2D6193EAEF900EB8D92 /* SubsonicSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				C9821F5B19522609006BA227 /* ArtistTests.swift */,
 				C90EC2D9193EAEF900EB8D92 /* SubsonicSwiftTests.swift */,
 				C90EC2D7193EAEF900EB8D92 /* Supporting Files */,
 			);
@@ -127,8 +140,10 @@
 		C9B02A3E193EB8D00000BC98 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C9821F5519522107006BA227 /* DictionaryExtensions.swift */,
+				C9821F591952221F006BA227 /* NSURLCredentialExtensions.swift */,
+				C9821F5719522201006BA227 /* StringExtensions.swift */,
 				C987CDEA1940A12D003E3438 /* SubsonicClient.swift */,
-				C9B02A3F193EB9310000BC98 /* NSURLCredentialExtension.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -216,6 +231,7 @@
 				C90EC2CB193EAEF900EB8D92 /* Images.xcassets in Resources */,
 				C90EC2CE193EAEF900EB8D92 /* MainMenu.xib in Resources */,
 				C96E4B04194BDE7300072D8A /* LoginViewController.xib in Resources */,
+				C918541E1954CA04003A0B51 /* ArtistsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,10 +250,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C987CDEB1940A12D003E3438 /* SubsonicClient.swift in Sources */,
+				C9821F5A1952221F006BA227 /* NSURLCredentialExtensions.swift in Sources */,
 				C90EC2C9193EAEF900EB8D92 /* AppDelegate.swift in Sources */,
-				C9B02A40193EB9310000BC98 /* NSURLCredentialExtension.swift in Sources */,
+				C9821F5819522201006BA227 /* StringExtensions.swift in Sources */,
 				C96E4B03194BDE7300072D8A /* LoginViewController.swift in Sources */,
 				C90EC2C7193EAEF900EB8D92 /* main.swift in Sources */,
+				C9821F5619522107006BA227 /* DictionaryExtensions.swift in Sources */,
+				C918541D1954CA04003A0B51 /* ArtistsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9821F5C19522609006BA227 /* ArtistTests.swift in Sources */,
 				C90EC2DA193EAEF900EB8D92 /* SubsonicSwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

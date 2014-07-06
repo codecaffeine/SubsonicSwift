@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var window: NSWindow
     let client: SubsonicClient
     var loginViewController: LoginViewController?
+    @lazy var artistViewController = ArtistsViewController()
 
     init() {
         client = SubsonicClient(appName: AppName,
@@ -37,8 +38,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func removeOldCredentialFromKeychain() {
         if let data = NSUserDefaults.standardUserDefaults().objectForKey(ProtectionSpace) as? NSData {
             if let space = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSURLProtectionSpace {
-                if let credential = NSURLCredentialStorage.sharedCredentialStorage().credentialsForProtectionSpace(space).objectEnumerator().nextObject() as? NSURLCredential {
-                    NSURLCredentialStorage.sharedCredentialStorage().removeCredential(credential, forProtectionSpace: space)
+                if let credentials = NSURLCredentialStorage.sharedCredentialStorage().credentialsForProtectionSpace(space) {
+                    if let credential = credentials.objectEnumerator().nextObject() as? NSURLCredential {
+                        NSURLCredentialStorage.sharedCredentialStorage().removeCredential(credential, forProtectionSpace: space)
+                    }
                 }
             }
             NSUserDefaults.standardUserDefaults().removeObjectForKey(ProtectionSpace)
@@ -47,12 +50,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func loadArtists() {
         self.client.artists {
-            data, reponse, error in
+            [weak self] (artists, reponse, error) in
 
-            if data {
-                let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: nil) as? Dictionary<String, AnyObject>
-                println("artists: \(jsonDict)")
-            } else {
+            if let artistsVC = self?.artistViewController {
+                artistsVC.artists = artists
+            }
+
+            if error {
                 println("error: \(error)")
             }
         }
@@ -66,6 +70,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if credential {
                 self?.saveNewCredentialToKeychain(credential)
                 self?.loadArtists()
+                if let contentView = self?.window.contentView as? NSView {
+                    self?.loginViewController?.view.removeFromSuperview()
+                    contentView.addSubview(self?.artistViewController.view)
+                }
             } else {
                 self?.removeOldCredentialFromKeychain()
             }
@@ -73,12 +81,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         if let data = NSUserDefaults.standardUserDefaults().objectForKey(ProtectionSpace) as? NSData {
             if let space = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSURLProtectionSpace {
-                if let credential = NSURLCredentialStorage.sharedCredentialStorage().credentialsForProtectionSpace(space).objectEnumerator().nextObject() as? NSURLCredential {
-                    let url = NSURLComponents()
-                    url.host = space.host;
-                    url.scheme = space.`protocol`
+                if let credentials = NSURLCredentialStorage.sharedCredentialStorage().credentialsForProtectionSpace(space) {
+                    if let credential = credentials.objectEnumerator().nextObject() as? NSURLCredential {
+                        let url = NSURLComponents()
+                        url.host = space.host;
+                        url.scheme = space.`protocol`
 
-                    self.client.authenticate(baseURL: url.URL.absoluteString, user: credential.user, password: credential.password, completion: authenticationCallback)
+                        self.client.authenticate(baseURL: url.URL.absoluteString, user: credential.user, password: credential.password, completion: authenticationCallback)
+                    }
                 }
             }
         }
@@ -99,13 +109,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(aNotification: NSNotification?) {
     }
 
-//    @IBAction func artistsPressed(sender : NSButton) {
-//        if let client = self.client {
-//            client.artists {
-//                data, response, error in
-//                NSLog("data: \(data)\nresponse: \(response)\nerror: \(error)")
-//            }
-//        }
-//    }
 }
 

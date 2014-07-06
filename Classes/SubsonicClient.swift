@@ -8,39 +8,108 @@
 
 import Cocoa
 
-struct Artist {
+protocol JSONSerializable {
+    class func fromJSON(json: Dictionary<String, AnyObject>) -> Self?
+}
+
+protocol SubsonicResponse: JSONSerializable {
+}
+
+struct Artist: JSONSerializable, Printable {
     let id: Int
     let name: String
     let covertArtRef: String
     let albumCount: Int
-}
 
-extension String {
-    var percentEncodedAll: String {
-    let allowedCharacters = NSCharacterSet(charactersInString:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~")
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
+    var description: String { return name }
+
+    static func fromJSON(json: Dictionary<String, AnyObject>) -> Artist? {
+        switch (json["id"], json["name"], json["coverArt"], json["albumCount"]) {
+        case(.Some(let idNum as NSNumber),
+            .Some(let name as NSString),
+            .Some(let covertArtRef as NSString),
+            .Some(let albumCountNum as NSNumber)):
+            let id = idNum.integerValue
+            let albumCount = albumCountNum.integerValue
+            return Artist(id: id, name: name, covertArtRef: covertArtRef, albumCount: albumCount)
+        default:
+            return nil
+        }
     }
 }
+
+struct Artists: SubsonicResponse {
+    var allArtists: Artist[]
+
+    static func fromJSON(json: Dictionary<String, AnyObject>) -> Artists? {
+        var artists = Artist[]()
+        switch json["index"] {
+        case .Some(let indexArray as NSArray):
+            if let index = indexArray as? Array<Dictionary<String, AnyObject>> {
+                for indexDict in index {
+                    switch indexDict["artist"] {
+                    case .Some(let artistArray as NSArray):
+                        if let artistsArr = artistArray as? Array<Dictionary<String, AnyObject>> {
+                            for artistDict in artistsArr {
+                                if let artist = Artist.fromJSON(artistDict) {
+                                    artists.append(artist)
+                                }
+                            }
+                        }
+                    default: ()
+                    }
+                }
+            }
+        default: ()
+        }
+        return Artists(allArtists: artists)
+    }
+}
+
+struct RequestResponse {
+    let status: String
+    let version: String
+    let response: SubsonicResponse
+
+    static func fromJSON(json: Dictionary<String, AnyObject>) -> RequestResponse? {
+        switch json["subsonic-response"] {
+        case .Some(let responseDict as NSDictionary):
+            var status: String?
+            var version: String?
+            var subsonicResponse: SubsonicResponse?
+
+            for (key, value : AnyObject) in responseDict as Dictionary<String, AnyObject> {
+                switch key {
+                case "status":
+                    status = value as? String
+                case "version":
+                    version = value as? String
+                case "artists":
+                    if let artistsDict = value as? Dictionary<String, AnyObject> {
+                        subsonicResponse = Artists.fromJSON(artistsDict)
+                    }
+                default:
+                    println("unhandled key: \(key)")
+                }
+            }
+            switch (status, version, subsonicResponse) {
+            case (.Some(_), .Some(_), .Some(_)):
+                return RequestResponse(status: status!, version: version!, response: subsonicResponse!)
+            default:
+                return nil
+            }
+        default:
+            return nil
+        }
+    }
+}
+
 
 extension NSURLCredential {
     var basicAuthenticationHeaders: Dictionary<String, String> {
         let base64Data = "\(self.user):\(self.password)".dataUsingEncoding(NSUTF8StringEncoding)
         let base64String = base64Data.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
         return ["Authorization": "Basic \(base64String)"]
-    }
-}
-
-extension Dictionary {
-    var percentEncodedQueryString: String {
-        var htmlParams = String[]()
-        for (key, value) in self {
-            if let keyString = key as? String {
-                if let valueString = value as? String {
-                    htmlParams += "\(keyString.percentEncodedAll)=\(valueString.percentEncodedAll)"
-                }
-            }
-        }
-        return NSArray(array:htmlParams).componentsJoinedByString("&")
     }
 }
 
@@ -79,6 +148,7 @@ class SubsonicClient: NSObject, NSURLSessionDelegate {
             persistence: NSURLCredentialPersistence.Permanent)
         self.sessionConfig.HTTPAdditionalHeaders = cred.basicAuthenticationHeaders
 
+
         ping() {
             data, response, error in
 
@@ -115,14 +185,27 @@ class SubsonicClient: NSObject, NSURLSessionDelegate {
         }
     }
 
-    func artists(completion: ((NSData!, NSURLResponse!, NSError!) -> Void)) {
+    func artists(completion: ((Artist[], NSURLResponse!, NSError!) -> Void)) {
         if urlComponents {
             let artistComponents: NSURLComponents = urlComponents!.copy() as NSURLComponents
             artistComponents.path = artistComponents.path + "/getArtists.view"
             println("get artists: \(artistComponents.URL)")
+
             let task = session.dataTaskWithURL(artistComponents.URL) {
                 data, response, error in
-                completion(data, response, error)
+
+                var artists = Artist[]()
+                if data {
+                    if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: nil) as? Dictionary<String, AnyObject> {
+                        if let requestResponse = RequestResponse.fromJSON(jsonDict) {
+                            if let responseArtists = requestResponse.response as? Artists {
+                                artists = responseArtists.allArtists
+                            }
+                        }
+                    }
+                }
+
+                completion(artists, response, error)
             }
             task.resume()
         }
